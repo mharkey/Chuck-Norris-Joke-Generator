@@ -46,8 +46,16 @@ class JokesViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
-    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return jokes.count
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let source = jokes[indexPath.row]
+        cell.textLabel?.text = source["name"]
+        cell.detailTextLabel?.text = source["description"]
+        return cell
+    }
     
 }
 
